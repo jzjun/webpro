@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>upfile</title>
     <script src="js/jquery-1.7.2.min.js"></script>
     <style>
     	#div img{
@@ -17,8 +17,8 @@
 </body>
 </html>
 <script>
-$(document).on('change', '.file', function () {
-    function getFileURL(file) {
+$(document).on('change', '.file', function () {          //set monitor event
+    function getImgURL(file) {
         var url = null;
         if (window.createObjectURL != undefined) {        //一般浏览器
             url = window.createObjectURL(file);
@@ -29,9 +29,9 @@ $(document).on('change', '.file', function () {
         }
         return url;
     }
-    var objUrl = getFileURL(this.files[0]);
-    console.log("objUrl = " + objUrl);
-    var pic= '<div class="photo-box"><img src="' + objUrl + '" alt=""></div>';
-    $('#div').html(pic);
+    var imgUrl = getImgURL(this.files[0]);          
+    console.log("objUrl = " + objUrl);            // cheak imgage url
+    var pic= '<div class="img-box"><img src="' + imgUrl + '" alt=""></div>';
+    $('#div').html(pic);                          //write in div
 })
 </script>
