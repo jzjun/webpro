@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/jquery-1.7.2.min.js"></script>
+    <style>
+    	#div img{
+    		width: 200px;
+    		height: 200px;
+    	} 
+    </style>
+</head>
+<body>
+<input type="file" id="input" class="file"/>
+<div id="div" style="width: 200px;height: 200px;"></div>
+</body>
+</html>
+<script>
+$(document).on('change', '.file', function () {
+    function getFileURL(file) {
+        var url = null;
+        if (window.createObjectURL != undefined) {        //一般浏览器
+            url = window.createObjectURL(file);
+        } else if (window.URL != undefined) {             //火狐浏览器
+            url = window.URL.createObjectURL(file);
+        } else if (window.webkitURL != undefined) {       //谷歌浏览器
+            url = window.webkitURL.createObjectURL(file);
+        }
+        return url;
+    }
+    var objUrl = getFileURL(this.files[0]);
+    console.log("objUrl = " + objUrl);
+    var pic= '<div class="photo-box"><img src="' + objUrl + '" alt=""></div>';
+    $('#div').html(pic);
+})
+</script>
